@@ -1,0 +1,28 @@
+server:
+  port: 8236
+
+spring:
+  redis:
+    host: kk.hb520.site
+    port: 2184
+  datasource:
+    type: org.apache.commons.dbcp2.BasicDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://kk.hb520.site:3306/ccq
+    username: root
+    password: lyhh2303
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+  application:
+    name: "memberCenter"
+  cloud:
+    zookeeper:
+      connect-string: kk.hb520.site:2181
+      discovery:
+        instance-host: 192.168.1.9
+        instance-port: 8236
