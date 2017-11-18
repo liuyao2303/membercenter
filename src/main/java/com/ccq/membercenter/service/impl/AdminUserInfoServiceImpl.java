@@ -60,7 +60,7 @@ public class AdminUserInfoServiceImpl implements AdminUserInfoService{
                 new Result(true,"更新成功！");
         }
 
-        return new Result(false,"用户名或密码不正确！");。
+        return new Result(false,"用户名或密码不正确！");
     }
 
     /**
