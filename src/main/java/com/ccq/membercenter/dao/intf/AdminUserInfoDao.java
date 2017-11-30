@@ -12,4 +12,5 @@ public interface AdminUserInfoDao {
     public int update(AdminUserInfo userInfo) ;
     public int userExists(String username,String password);
     public List<AdminUserInfo> queryAdminUserByPage(Page page);
+    public AdminUserInfo queryAdminUserInfoByName(String username);
 }

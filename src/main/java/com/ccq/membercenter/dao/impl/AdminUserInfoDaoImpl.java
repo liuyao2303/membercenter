@@ -39,6 +39,12 @@ public class AdminUserInfoDaoImpl extends MybatisDao implements AdminUserInfoDao
         });
     }
 
+    @Override
+    public AdminUserInfo queryAdminUserInfoByName(String username) {
+        String sql = "";
+        return jdbcDao.queryForObject(sql,new String[]{ username },new BeanPropertyRowMapper<AdminUserInfo>(AdminUserInfo.class));
+    }
+
     public int update(AdminUserInfo userInfo) {
         String sql = "UPDATE admin_user_tbl SET username = ?,avatar=?,sex=?,phone_number=?,email=?,address=?,city_code=?,create_time=?,status=? WHERE id = ?";
         return jdbcDao.update(sql, new PreparedStatementSetter() {
