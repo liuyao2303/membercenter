@@ -32,7 +32,7 @@ public class AdminUserInfoController {
      * @return
      * @throws ServletException
      */
-    @RequestMapping(name = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public JsonResult login(HttpServletRequest request, String username, String password) throws ServletException {
 
         Result r = adminUserInfoService.userCert(username, password);
@@ -54,7 +54,7 @@ public class AdminUserInfoController {
      * @param pageNum
      * @return
      */
-    @RequestMapping(name = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public JsonResult getAdminuserInfoList(HttpServletRequest request, String status,
                                            String username, int accessLevel, int pageSize, int pageNum) {
 
@@ -65,6 +65,7 @@ public class AdminUserInfoController {
         if (!r.isSuccess()) return JsonResult.getErrorResult(r.getMessage());
         else {
             JsonResult jr = JsonResult.getSuccessResult("OK");
+            jr.setPage(page);
             jr.setObject(r.getObject());
             return jr;
         }
@@ -75,9 +76,10 @@ public class AdminUserInfoController {
      *
      * @return
      */
+    @RequestMapping("index")
     public JsonResult changePwd() {
 
-        return null;
+        return JsonResult.getSuccessResult("yes");
     }
 
 }

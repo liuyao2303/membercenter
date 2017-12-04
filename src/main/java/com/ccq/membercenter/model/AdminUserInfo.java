@@ -7,34 +7,35 @@ import java.io.Serializable;
 public class AdminUserInfo implements Serializable{
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username",length = 64)
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "avatar",length = 128)
+    @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "sex", precision = 1)
+    @Column(name = "sex")
     private Integer sex;
 
-    @Column(name = "phone_number",length = 11)
+    @Column(name = "phone_number")
     private String phone;
 
-    @Column(name = "email",length = 64)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "address",length = 128)
+    @Column(name = "address")
     private String addr;
 
-    @Column(name = "city_code",length = 4)
+    @Column(name = "city_code")
     private String city;
 
     @Column(name = "create_time")
     private Long createTime;
 
-    @Column(name = "status",precision = 1)
+    @Column(name = "status")
     private Long status;
 
     public Long getId() {
