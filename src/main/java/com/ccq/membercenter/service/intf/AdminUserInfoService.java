@@ -10,4 +10,8 @@ public interface AdminUserInfoService {
     public Result getAdminUserList(Page page);
     public Result disableAdminUser(Long userId);
     public Result addAdminUser(UserInfoDto dto);
+    public Result getAdminUserList(String status,
+                                   String username,
+                                   int accessLevel,
+                                   Page page);
 }

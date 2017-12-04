@@ -5,7 +5,9 @@ import com.ccq.framework.jdbc.dao.JdbcTempleteDao;
 import com.ccq.framework.lang.Page;
 import com.ccq.membercenter.dao.intf.AdminUserInfoDao;
 import com.ccq.membercenter.model.AdminUserInfo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.zookeeper.support.StatusConstants;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
@@ -97,6 +99,7 @@ public class AdminUserInfoDaoImpl extends MybatisDao implements AdminUserInfoDao
                             ,new Object[]{id,password},Integer.class);
     }
 
+    @Override
     public List<AdminUserInfo> queryAdminUserByPage(Page page) {
 
         int count = jdbcDao.queryForObject("select count(*) from admin_user_tbl",Integer.class);
@@ -104,5 +107,33 @@ public class AdminUserInfoDaoImpl extends MybatisDao implements AdminUserInfoDao
         page.setPages(((int) (count/page.getPageSize())) + ((count%page.getPageSize()>0) ? 1:0));
         String sql = "select * from admin_user_tbl offset ? limit ?";
         return jdbcDao.query(sql,new Object[]{offset,page.getPageSize()},new BeanPropertyRowMapper<AdminUserInfo>(AdminUserInfo.class));
+    }
+
+    /**
+     *  噶嗯据条件查询具体信息
+     * @param status
+     * @param username
+     * @param accessLevel
+     * @param page
+     * @return
+     */
+    @Override
+    public List<AdminUserInfo> queryAdminUserByPage(String status,
+                                                    String username,
+                                                    int accessLevel,
+                                                    Page page) {
+        AdminUserInfo con = new AdminUserInfo();
+        if(StringUtils.isNotBlank(status)) {
+            con.setStatus(Long.parseLong(status));
+        }
+
+        if(StringUtils.isNotBlank(username)) {
+            con.setUsername(username);
+        }
+
+        if(accessLevel > 0) {
+            //TODO unsupport
+        }
+        return super.selectListByPage(con,page);
     }
 }

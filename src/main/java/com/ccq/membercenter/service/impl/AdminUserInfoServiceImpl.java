@@ -108,6 +108,25 @@ public class AdminUserInfoServiceImpl implements AdminUserInfoService{
         return r;
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Result getAdminUserList(String status,
+                                   String username,
+                                   int accessLevel,
+                                   Page page) {
+        List<AdminUserinfoDto> users = adminUserInfoDao.queryAdminUserByPage(status,
+                username,
+                accessLevel,
+                page)
+                .stream().map(item -> AdminUserinfoDto.fromAdminUserModel(item)).collect(Collectors.toList());
+        Result r = new Result(true,"");
+        r.setObject(users);
+        return r;
+    }
+
 
     /**
      * 禁用用户

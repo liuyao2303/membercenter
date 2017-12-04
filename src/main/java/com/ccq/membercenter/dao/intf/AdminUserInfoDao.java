@@ -13,4 +13,8 @@ public interface AdminUserInfoDao {
     public int userExists(String username,String password);
     public List<AdminUserInfo> queryAdminUserByPage(Page page);
     public AdminUserInfo queryAdminUserInfoByName(String username);
+    public List<AdminUserInfo> queryAdminUserByPage(String status,
+                                                    String username,
+                                                    int accessLevel,
+                                                    Page page);
 }
